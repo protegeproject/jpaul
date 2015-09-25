@@ -10,7 +10,7 @@
 
     <groupId>edu.stanford.protege</groupId>
     <artifactId>jpaul</artifactId>
-    <version>2.5.1-SNAPSHOT</version>
+    <version>2.5.1</version>
 
     <licenses>
         <license>
