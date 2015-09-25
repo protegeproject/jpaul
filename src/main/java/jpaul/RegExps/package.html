@@ -1,0 +1,55 @@
+
+<html>
+
+<head>
+Regular Expressions
+</head>
+
+
+<body>
+
+<!-- $Id: package.html,v 1.4 2005/09/05 20:48:44 salcianu Exp $ -->
+
+Classes that model regular expressions and NFAs.
+
+<p>Most of the RegExp-related packages are focused on efficiently
+parsing strings of characters; they usually take a regular expression
+and convert it into an NFA (a Non-deterministic Finite Automaton) and
+later into a DFA (a Deterministic Finite Automaton) that is used for
+parsing.
+
+<p>Instead, this package offers classes that are parametric in the
+input alphabet.  Currently, the focus is on converting an NFA into a
+regular expression, but ultimately, we plan to cover the other
+direction too.
+
+<p>
+Where to start?
+
+<ul>
+
+<li>Regular expressions: {@link jpaul.RegExps.RegExp RegExp} and its inner classes.
+
+<li>Finite automata: {@link jpaul.RegExps.NFA NFA}.
+
+</ul>
+
+<p>
+Future plans:
+
+<ul>
+
+<li>RegExp 2 NFA conversion
+
+<li>NFA 2 DFA conversion
+
+<li>Finite automata equivalence, difference, intersection etc.
+
+</ul>
+
+@author Suhabe Bugrara - suhabe@alum.mit.edu
+@author Alexandru Salcianu - salcianu@alum.mit.edu
+
+</body>
+
+</html>

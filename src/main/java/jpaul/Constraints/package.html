@@ -1,0 +1,112 @@
+<html>
+
+<head>
+Constraints
+</head>
+
+
+<body>
+
+Generic solver for inequality constraints over lattices.
+
+<p>
+This package provides a generic way of modeling and solving systems of
+inequality constraints over lattices.  This package deals with
+constraints of the form
+
+   <blockquote>
+   <code>
+     <i>f</i>(vi_1,vi_2,...,vi_m)  &lt;=  &lt;vo_1,vo_2,...,vo_n&gt;
+   </code>
+   </blockquote>
+
+where the ordering relation <code>&lt;=</code> is specific to the
+relevant lattices.  The function <code><i>f</i></code> is not defined
+in a specialized declarative language: instead, it is defined as a
+Java method that reads the values of the input variables <code>vi_1,
+..., vi_m</code>, computes some values, and finally joins the computed
+values to the output variables <code>vo_1, ..., vo_m</code>; the
+constraints access the values of the variables through a well-defined
+interface ({@link jpaul.Constraints.SolAccessor SolAccessor}).  The
+programmer can define new constraints by subclassing the {@link
+jpaul.Constraints.Constraint Constraint} class.
+
+<p>
+A system of constraints may involve variables that take values in
+different lattices: e.g., the values of some variables are sets of
+atoms, while the values of some other variables are binary relations
+between atoms.  As such, this package generalizes usual set constraint
+solvers.  Of course, specialized set solvers may be much faster and
+you are encouraged to take a look over them too.
+
+
+<p>
+The essential classes from this package are
+
+<ul>
+
+<li>{@link jpaul.Constraints.Var Var} - variables; also, each variable
+carries with it the operations of the lattice it takes values in;
+
+<li>{@link jpaul.Constraints.Constraint Constraint} - general form of
+a constraint; each constraint should subclass this class;
+
+<li>{@link jpaul.Constraints.ConstraintSystem ConstraintSystem} - an efficient constraint solver.
+
+</ul>
+
+<p>
+Classes from this package are parameterized over the type of variables
+(always a subtype of <code>Var</code>) and the common supertype of the
+classes representing the value lattices (in the extreme case, if there
+is no better supertype, this type parameter can be <code>Object</code>).
+If we have several value lattices, certain type errors cannot be
+detected statically: e.g., a constraint that states that a binary
+relation is included in a set of atoms will trigger a dynamic
+exception.  The program should be careful about this aspect when
+writting constraints.
+
+<p>
+To use this package, the programmer must follow the following steps
+
+<ol>
+
+<li>Write one subclass of {@link jpaul.Constraints.Var Var} for each
+kind of variables: e.g., one subclass for the variables that have set
+values and one subclass for the variables that have relation values.
+The essential point here is to define the lattice-related operations
+{@link jpaul.Constraints.Var#copy copy} and {@link
+jpaul.Constraints.Var#join join}.  In addition, it is usually a good
+idea to add some debug information; e.g., override the default {@link
+jpaul.Constraints.Var#toString Var.toString} method.
+
+<li>If necessary, write one subclass of {@link
+jpaul.Constraints.Constraint Constraint} for each kind of constraints.
+This package already contains two very basic kinds of constraints
+({@link jpaul.Constraints.CtConstraint CtConstraint} and {@link
+jpaul.Constraints.LtConstraint LtConstraint}), but you usually need to
+define your own constraints too.  Here is a sample constraint
+implementation: simplified <a
+href="SetConstraints/doc-files/IntersectConstraint.java">SetConstraints.IntersectConstraint</a>.
+
+<li>Construct a collection of constraints and use {@link
+jpaul.Constraints.ConstraintSystem ConstraintSystem} to solve them.
+[ {@link jpaul.Constraints.ConstraintSystem ConstraintSystem}
+works in two steps: first, it computes some data structures that allow
+the efficient computation of a fixed-point solution; next, we can
+solve it several times, at different moments in time: if some of the
+constraints use external values that change, the solutions may be
+different.  So, {@link jpaul.Constraints.ConstraintSystem
+ConstraintSystem} is an optimized constraint system <i>schema</i> that
+can be efficiently solved several times. ]
+
+</ol>
+
+
+@see jpaul.Constraints.SetConstraints
+
+@author Alexandru Salcianu - salcianu@alum.mit.edu
+
+</body>
+
+</html>

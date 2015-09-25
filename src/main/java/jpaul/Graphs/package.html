@@ -1,0 +1,113 @@
+
+<html>
+
+<head>
+
+</head>
+
+
+<body>
+
+Graph-related classes and algorithms.  It is surprising how many
+compiler algorithms can be described in terms of pure graph
+algorithms, without any additional knowledge about the instructions of
+the analyzed program besides their graph structure.  This package
+attempts to provide a very general library that will eliminate the
+need to reimplement these algorithms for every new compiler.
+
+
+<p><b>Graph model:</b> We model a directed graph ({@link
+jpaul.Graphs.DiGraph DiGraph}) as a set of <i>root</i> vertices and a
+{@link jpaul.Graphs.BiDiNavigator navigator} that describes the arcs
+of the graph.  The navigator is an iterator over the directed graph:
+given a vertex <code>v</code>, it gives <code>v</code>'s direct
+successors (i.e., vertices pointed to by arcs that start in
+<code>v</code>), and (in the case of a bi-directional navigator),
+<code>v</code>'s direct predecessors.  The digraph consists of all the
+vertices that can be reached from the roots, by following forward arcs
+given by the navigator.  This design allows the use of our library
+even for graphs whose arcs are not explicitly stored in the vertices.
+As an example, consider a call graph: the caller-callee relation is
+not usually stored at the level of each procedure; still, the call
+graph is a real directed graph, and we want to be able to apply all
+graph algorithms to it.
+
+<p>
+[ <i>The graph algorithms work with both {@link jpaul.Graphs.BiDiNavigator
+bi-directional} and {@link jpaul.Graphs.ForwardNavigator forward-only}
+navigators.  The explanation is that we can produce one kind of
+navigators based on the other one: any bi-directional navigator is
+trivially a forward one; conversely, given a forward navigator and a
+set of roots, we can traverse the whole graph, &amp;discover&amp; the
+predecessors of each vertex, and construct a bi-directional navigator.
+If possible, the user can give a bi-directional navigator and spare
+the cost of constructing one based on a forward-only navigator.</i> ]
+
+
+<p>
+<b>A note on dynamic graphs:</b> Notice that the simple graph model
+described above has no mechanism for informing a graph when a mutation
+is performed (e.g., when an arc is added).  For example, if one
+computes the component graph of a digraph and next the underlying
+digraph changes, these changes are not propagated to the component
+graph.  The reasons we don't have such a mechanism are: (1) complexity
+(hard to program it and hard to get it right); (2) cost; and (3) we
+want our library to work with many graph-like structures that already
+exist.  It is the user's responsibility to make sure that a graph does
+not change in the middle of an operation on it.  E.g., a graph should
+not change while we compute its component graph; if the original graph
+changes and we need to update the component graph, we have to
+recompute it.  This strategy is easy to implement and test, and also
+seems to work well if the digraph changes come in stages (as it
+usually happens in a compiler: we alternate stages of analysis and
+optimization).
+
+<p><b>Things implemented so far:</b>
+
+<ul>
+
+<li>Generic definition of a directed graph:
+{@link jpaul.Graphs.DiGraph  DiGraph} (unlabeled digraphs) and
+{@link jpaul.Graphs.LabeledDiGraph LabeledDiGraph} (labeled digraphs).
+
+<li>General digraph algorithms: digraph union ({@link
+jpaul.Graphs.DiGraph#union DiGraph.union}), dfs traversals ({@link
+jpaul.Graphs.DiGraph#dfs DiGraph.dfs}), reachability ({@link
+jpaul.Graphs.DiGraph#transitiveSucc DiGraph.transitiveSucc}), shortest
+paths (in terms of number of edges, no weighted edges yet) ({@link
+jpaul.Graphs.DiGraph#findPath DiGraph.findPath}), etc.
+
+<li>Strongly connected components ({@link jpaul.Graphs.SCComponent
+SCComponent}): given a digraph, we can construct its topologically
+sorted component digraph, a digraph whose vertices are the SCCs of the
+original grap; see {@link jpaul.Graphs.TopSortedCompDiGraph
+TopSortedCompDiGraph} for more details.
+
+<li>Basic block representation of a digraph: {@link
+jpaul.Graphs.BasicBlockDiGraph BasicBlockDiGraph}.  A basic block
+({@link jpaul.Graphs.BasicBlock BasicBlock}) is a straight-line
+sequences of digraph vertices.
+
+</ul>
+
+
+<p><b>Things we would like to see implemented in the future:</b>
+
+<ul>
+
+<li>Support for weighted digraphs.
+
+<li>Detection of dominators.
+
+<li>Detection of loops.
+
+<li>Detection of Single-Entry Single-Exit (SESE) graph regions (useful
+for the SSA conversion).
+
+</ul>
+
+@author Alexandru Salcianu - salcianu@alum.mit.edu
+
+</body>
+
+</html>

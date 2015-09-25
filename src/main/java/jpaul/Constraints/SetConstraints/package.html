@@ -1,0 +1,52 @@
+<html>
+
+<head>
+Constraints
+</head>
+
+
+<body>
+
+Test of the generic constraint solver: set constraint solver.
+
+<p>
+This package tests the generic constraint solver from the package
+{@link jpaul.Constraints} by instantiating it for set constraints.  It
+is mostly intended as a test case, but can also be used for set
+constraint solving in research prototypes.
+
+<p>
+To obtain a set constraint solver, the only important operation was to
+subclass {@link jpaul.Constraints.Var Var} into {@link
+jpaul.Constraints.SetConstraints.SVar SVar}.  {@link
+jpaul.Constraints.SetConstraints.SVar SVar} models a set-valued
+variable; it implements implements the {@link
+jpaul.Constraints.Var#copy copy} and {@link jpaul.Constraints.Var#join
+join} operations for elements of powerset lattices.  {@link
+jpaul.Constraints.SetConstraints.SetConstraints SetConstraints} is
+just a convenience class that eases the generation of common set
+constraints.
+
+<p>
+Five set constraints are available. Two of them are direct instances
+of more general constraints: inclusion between two set variables and
+inclusion between a constant set and a set variable (see {@link
+jpaul.Constraints.SetConstraints#addInclusion
+SetConstraints.addInclusion} and {@link
+jpaul.Constraints.SetConstraints#addCtSource
+SetConstraints.addCtSource}).  We also have three more interesting
+ones: {@link jpaul.Constraints.SetConstraints.IntersectConstraint
+IntersectConstraint}, {@link
+jpaul.Constraints.SetConstraints.FilterConstraint FilterConstraint},
+and {@link jpaul.Constraints.SetConstraints.CtDiffConstraint
+CtDiffConstraint}.  You can define other constraints by subclassing
+{@link jpaul.Constraints.Constraint}.
+
+<p>
+Example constraint code: simplified <a href="doc-files/IntersectConstraint.java">IntersectConstraint</a>
+
+@author Alexandru Salcianu - salcianu@alum.mit.edu
+
+</body>
+
+</html>

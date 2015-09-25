@@ -1,0 +1,60 @@
+<html>
+
+<head>
+Data structures
+</head>
+
+
+<body>
+
+Data structures for program analysis and not only.  Here is a
+brief overview:
+
+<ul>
+
+
+<li>{@link jpaul.DataStructs.WorkSet}s (e.g., for fixed-point
+computations): {@link jpaul.DataStructs.WorkList}, {@link
+jpaul.DataStructs.WorkSet}, and {@link
+jpaul.DataStructs.WorkPriorityQueue}.
+
+<li>Classes and interfaces for the <i>Factory Design Pattern</i>:
+{@link jpaul.DataStructs.Factory} and its (many) children.  Using the
+factory design pattern allows the programmer to switch from one data
+structure implementation to another with minimal effort.  Of special
+importance are the set and map factories from {@link
+jpaul.DataStructs.SetFacts SetFacts} and {@link
+jpaul.DataStructs.MapFacts MapFacts}.
+
+<li>Binary and ternary relations: {@link jpaul.DataStructs.Relation},
+{@link jpaul.DataStructs.Relation3} and their children.  These classes
+eliminate the need to manually handle maps to maps to sets, and
+provide other goodies too.
+
+<li><i>Copy-On-Write</i> data structures: see {@link
+jpaul.DataStructs.SetFacts#cow SetFacts.cow} and {@link
+jpaul.DataStructs.RelFacts#cow RelFacts.cow}.  Represent a middle point
+between mutation-based <code>java.util</code> data structures and
+purely functional datastructures (such as those from <a
+href="http://cscott.net/Projects/JUtil">jutil</a>).
+
+<li>Lots of useful static methods in {@link jpaul.DataStructs.DSUtil},
+many of them familiar to people with a functional programming
+background: map, filter etc.
+
+<li><code>Map</code> with default values for unassigned keys: {@link
+jpaul.DataStructs.MapWithDefault}.  This may be useful if the
+programmer wants a default value that is not <code>null</code>.
+
+<li>The ever popular {@link jpaul.DataStructs.Pair}: very often, we
+need to return more than one thing from a method.  Returning an array
+of <code>Object</code>s loses type safety.  Something like
+<code>Pair&lt;Integer,String&gt;</code> is far more informative.
+
+</ul>
+
+@author Alexandru Salcianu - salcianu@alum.mit.edu
+
+</body>
+
+</html>
