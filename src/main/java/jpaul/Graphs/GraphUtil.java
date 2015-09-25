@@ -57,8 +57,8 @@ public final class GraphUtil {
 
 
     /** Returns the reverse of a given navigator.  In the resulting
-	reverse navigator, the <code>next<code> method returns the
-	same result as <code>nav.prev</code>, and the <code>prev<code>
+	reverse navigator, the <code>next</code> method returns the
+	same result as <code>nav.prev</code>, and the <code>prev</code>
 	method returns the same result as <code>nav.next</code>. */
     public static <Vertex> BiDiNavigator<Vertex> reverseBiDiNavigator(BiDiNavigator<Vertex> nav) {
 	return new ReverseBiDiNavigator<Vertex>(nav);

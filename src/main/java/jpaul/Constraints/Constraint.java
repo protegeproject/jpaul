@@ -18,9 +18,9 @@ import jpaul.DataStructs.UnionFind;
    </code>
    </blockquote>
 
-   where <code>vi_1<code>, <code>vi_2</code>, ..., <code>vi_m</code>
+   where <code>vo_1</code>, <code>vi_2</code>, ..., <code>vi_m</code>
    are the <i>input</i> variables of the constraints,
-   <code>vo_1<code>, <code>vo_2</code>, ..., <code>vo_n</code> are the
+   <code>vo_1</code>, <code>vo_2</code>, ..., <code>vo_n</code> are the
    <i>output</i> variables, and <i>f</i> is a computable function.
 
    <p>

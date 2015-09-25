@@ -493,7 +493,7 @@ public abstract class RegExp<A> implements Cloneable, Serializable {
 	    new LinkedHashMap<IdentityWrapper<RegExp<A>>,RegExp<A>>();
 
 	/** Performs several simple simplifications of regular
-            expressions: e.g., <code>Star(None)<code> is equivalent to
+            expressions: e.g., <code>Star(None)</code> is equivalent to
             <code>EmptyStr</code>. */
 	public RegExp<A> simplify(RegExp<A> regExp) {
 	    IdentityWrapper<RegExp<A>> rew = new IdentityWrapper<RegExp<A>>(regExp);
